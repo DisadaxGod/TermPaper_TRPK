@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище ITModelContainer" CdmEntityContainer="ITEntities">
+    <EntitySetMapping Name="CharacteristicsTI">
+      <EntityTypeMapping TypeName="ITModel.CharacteristicsTI">
+        <MappingFragment StoreEntitySet="CharacteristicsTI">
+          <ScalarProperty Name="idCharacteristicsTI" ColumnName="idCharacteristicsTI" />
+          <ScalarProperty Name="brakeSystems" ColumnName="brakeSystems" />
+          <ScalarProperty Name="steering" ColumnName="steering" />
+          <ScalarProperty Name="lightDevices" ColumnName="lightDevices" />
+          <ScalarProperty Name="windscreenWipers" ColumnName="windscreenWipers" />
+          <ScalarProperty Name="tiresAndWheels" ColumnName="tiresAndWheels" />
+          <ScalarProperty Name="engine" ColumnName="engine" />
+          <ScalarProperty Name="structuralElements" ColumnName="structuralElements" />
+          <ScalarProperty Name="safetyRequirements" ColumnName="safetyRequirements" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DiagnosticMap">
+      <EntityTypeMapping TypeName="ITModel.DiagnosticMap">
+        <MappingFragment StoreEntitySet="DiagnosticMap">
+          <ScalarProperty Name="idDiagnosticMap" ColumnName="idDiagnosticMap" />
+          <ScalarProperty Name="Driver_idDriver" ColumnName="Driver_idDriver" />
+          <ScalarProperty Name="stateCarNumber" ColumnName="stateCarNumber" />
+          <ScalarProperty Name="engineNumber" ColumnName="engineNumber" />
+          <ScalarProperty Name="color" ColumnName="color" />
+          <ScalarProperty Name="carModel" ColumnName="carModel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Driver">
+      <EntityTypeMapping TypeName="ITModel.Driver">
+        <MappingFragment StoreEntitySet="Driver">
+          <ScalarProperty Name="idDriver" ColumnName="idDriver" />
+          <ScalarProperty Name="driverCertificateNumber" ColumnName="driverCertificateNumber" />
+          <ScalarProperty Name="fullName" ColumnName="fullName" />
+          <ScalarProperty Name="dateOfBirth" ColumnName="dateOfBirth" />
+          <ScalarProperty Name="sex" ColumnName="sex" />
+          <ScalarProperty Name="adress" ColumnName="adress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ResultsTI">
+      <EntityTypeMapping TypeName="ITModel.ResultsTI">
+        <MappingFragment StoreEntitySet="ResultsTI">
+          <ScalarProperty Name="idResultsTI" ColumnName="idResultsTI" />
+          <ScalarProperty Name="TrafficPoliceOfficer_idTrafficPoliceOfficer" ColumnName="TrafficPoliceOfficer_idTrafficPoliceOfficer" />
+          <ScalarProperty Name="DiagnosticMap_idDiagnosticMap" ColumnName="DiagnosticMap_idDiagnosticMap" />
+          <ScalarProperty Name="CharacteristicsTI_idCharacteristicsTI" ColumnName="CharacteristicsTI_idCharacteristicsTI" />
+          <ScalarProperty Name="dateOfPassage" ColumnName="dateOfPassage" />
+          <ScalarProperty Name="cityOfMaintenance" ColumnName="cityOfMaintenance" />
+          <ScalarProperty Name="placeOfMaintenance" ColumnName="placeOfMaintenance" />
+          <ScalarProperty Name="resultOfMaintenance" ColumnName="resultOfMaintenance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TrafficPoliceOfficer">
+      <EntityTypeMapping TypeName="ITModel.TrafficPoliceOfficer">
+        <MappingFragment StoreEntitySet="TrafficPoliceOfficer">
+          <ScalarProperty Name="idTrafficPoliceOfficer" ColumnName="idTrafficPoliceOfficer" />
+          <ScalarProperty Name="passportData" ColumnName="passportData" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="pasword" ColumnName="pasword" />
+          <ScalarProperty Name="fullName" ColumnName="fullName" />
+          <ScalarProperty Name="rank" ColumnName="rank" />
+          <ScalarProperty Name="position" ColumnName="position" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="CharacteristicsTIInsert" FunctionName="Хранилище ITModel.CharacteristicsTIInsert" />
+    <FunctionImportMapping FunctionImportName="CharacteristicsTIOutputAll" FunctionName="Хранилище ITModel.CharacteristicsTIOutputAll">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ITModel.CharacteristicsTIOutputAll_Result">
+          <ScalarProperty Name="idCharacteristicsTI" ColumnName="idCharacteristicsTI" />
+          <ScalarProperty Name="brakeSystems" ColumnName="brakeSystems" />
+          <ScalarProperty Name="steering" ColumnName="steering" />
+          <ScalarProperty Name="lightDevices" ColumnName="lightDevices" />
+          <ScalarProperty Name="windscreenWipers" ColumnName="windscreenWipers" />
+          <ScalarProperty Name="tiresAndWheels" ColumnName="tiresAndWheels" />
+          <ScalarProperty Name="engine" ColumnName="engine" />
+          <ScalarProperty Name="structuralElements" ColumnName="structuralElements" />
+          <ScalarProperty Name="safetyRequirements" ColumnName="safetyRequirements" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="DiagnosticMapAndDriverInsert" FunctionName="Хранилище ITModel.DiagnosticMapAndDriverInsert" />
+    <FunctionImportMapping FunctionImportName="DiagnosticMapInsert" FunctionName="Хранилище ITModel.DiagnosticMapInsert" />
+    <FunctionImportMapping FunctionImportName="DiagnosticMapOutputAll" FunctionName="Хранилище ITModel.DiagnosticMapOutputAll">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ITModel.DiagnosticMapOutputAll_Result">
+          <ScalarProperty Name="idDiagnosticMap" ColumnName="idDiagnosticMap" />
+          <ScalarProperty Name="Driver_idDriver" ColumnName="Driver_idDriver" />
+          <ScalarProperty Name="stateCarNumber" ColumnName="stateCarNumber" />
+          <ScalarProperty Name="engineNumber" ColumnName="engineNumber" />
+          <ScalarProperty Name="color" ColumnName="color" />
+          <ScalarProperty Name="carModel" ColumnName="carModel" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="DriverAndDiagnosticMapOutput" FunctionName="Хранилище ITModel.DriverAndDiagnosticMapOutput">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ITModel.DriverAndDiagnosticMapOutput_Result">
+          <ScalarProperty Name="idDiagnosticMap" ColumnName="idDiagnosticMap" />
+          <ScalarProperty Name="Driver_idDriver" ColumnName="Driver_idDriver" />
+          <ScalarProperty Name="stateCarNumber" ColumnName="stateCarNumber" />
+          <ScalarProperty Name="engineNumber" ColumnName="engineNumber" />
+          <ScalarProperty Name="color" ColumnName="color" />
+          <ScalarProperty Name="carModel" ColumnName="carModel" />
+          <ScalarProperty Name="idDriver" ColumnName="idDriver" />
+          <ScalarProperty Name="driverCertificateNumber" ColumnName="driverCertificateNumber" />
+          <ScalarProperty Name="fullName" ColumnName="fullName" />
+          <ScalarProperty Name="dateOfBirth" ColumnName="dateOfBirth" />
+          <ScalarProperty Name="sex" ColumnName="sex" />
+          <ScalarProperty Name="adress" ColumnName="adress" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="DriverInsert" FunctionName="Хранилище ITModel.DriverInsert" />
+    <FunctionImportMapping FunctionImportName="DriverOutputAll" FunctionName="Хранилище ITModel.DriverOutputAll">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ITModel.DriverOutputAll_Result">
+          <ScalarProperty Name="idDriver" ColumnName="idDriver" />
+          <ScalarProperty Name="driverCertificateNumber" ColumnName="driverCertificateNumber" />
+          <ScalarProperty Name="fullName" ColumnName="fullName" />
+          <ScalarProperty Name="dateOfBirth" ColumnName="dateOfBirth" />
+          <ScalarProperty Name="sex" ColumnName="sex" />
+          <ScalarProperty Name="adress" ColumnName="adress" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="DriverUpdate" FunctionName="Хранилище ITModel.DriverUpdate" />
+    <FunctionImportMapping FunctionImportName="ResultsAllInsert" FunctionName="Хранилище ITModel.ResultsAllInsert" />
+    <FunctionImportMapping FunctionImportName="ResultsOutputAll" FunctionName="Хранилище ITModel.ResultsOutputAll">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ITModel.ResultsOutputAll_Result">
+          <ScalarProperty Name="idResultsTI" ColumnName="idResultsTI" />
+          <ScalarProperty Name="TrafficPoliceOfficer_idTrafficPoliceOfficer" ColumnName="TrafficPoliceOfficer_idTrafficPoliceOfficer" />
+          <ScalarProperty Name="DiagnosticMap_idDiagnosticMap" ColumnName="DiagnosticMap_idDiagnosticMap" />
+          <ScalarProperty Name="CharacteristicsTI_idCharacteristicsTI" ColumnName="CharacteristicsTI_idCharacteristicsTI" />
+          <ScalarProperty Name="dateOfPassage" ColumnName="dateOfPassage" />
+          <ScalarProperty Name="cityOfMaintenance" ColumnName="cityOfMaintenance" />
+          <ScalarProperty Name="placeOfMaintenance" ColumnName="placeOfMaintenance" />
+          <ScalarProperty Name="resultOfMaintenance" ColumnName="resultOfMaintenance" />
+          <ScalarProperty Name="idCharacteristicsTI" ColumnName="idCharacteristicsTI" />
+          <ScalarProperty Name="brakeSystems" ColumnName="brakeSystems" />
+          <ScalarProperty Name="steering" ColumnName="steering" />
+          <ScalarProperty Name="lightDevices" ColumnName="lightDevices" />
+          <ScalarProperty Name="windscreenWipers" ColumnName="windscreenWipers" />
+          <ScalarProperty Name="tiresAndWheels" ColumnName="tiresAndWheels" />
+          <ScalarProperty Name="engine" ColumnName="engine" />
+          <ScalarProperty Name="structuralElements" ColumnName="structuralElements" />
+          <ScalarProperty Name="safetyRequirements" ColumnName="safetyRequirements" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ResultsTIInsert" FunctionName="Хранилище ITModel.ResultsTIInsert" />
+    <FunctionImportMapping FunctionImportName="ResultsTIOutputAll" FunctionName="Хранилище ITModel.ResultsTIOutputAll">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ITModel.ResultsTIOutputAll_Result">
+          <ScalarProperty Name="idResultsTI" ColumnName="idResultsTI" />
+          <ScalarProperty Name="TrafficPoliceOfficer_idTrafficPoliceOfficer" ColumnName="TrafficPoliceOfficer_idTrafficPoliceOfficer" />
+          <ScalarProperty Name="DiagnosticMap_idDiagnosticMap" ColumnName="DiagnosticMap_idDiagnosticMap" />
+          <ScalarProperty Name="CharacteristicsTI_idCharacteristicsTI" ColumnName="CharacteristicsTI_idCharacteristicsTI" />
+          <ScalarProperty Name="dateOfPassage" ColumnName="dateOfPassage" />
+          <ScalarProperty Name="cityOfMaintenance" ColumnName="cityOfMaintenance" />
+          <ScalarProperty Name="placeOfMaintenance" ColumnName="placeOfMaintenance" />
+          <ScalarProperty Name="resultOfMaintenance" ColumnName="resultOfMaintenance" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="TrafficPoliceOfficerInsert" FunctionName="Хранилище ITModel.TrafficPoliceOfficerInsert" />
+    <FunctionImportMapping FunctionImportName="TrafficPoliceOfficerOutputAll" FunctionName="Хранилище ITModel.TrafficPoliceOfficerOutputAll">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ITModel.TrafficPoliceOfficerOutputAll_Result">
+          <ScalarProperty Name="idTrafficPoliceOfficer" ColumnName="idTrafficPoliceOfficer" />
+          <ScalarProperty Name="passportData" ColumnName="passportData" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="pasword" ColumnName="pasword" />
+          <ScalarProperty Name="fullName" ColumnName="fullName" />
+          <ScalarProperty Name="rank" ColumnName="rank" />
+          <ScalarProperty Name="position" ColumnName="position" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

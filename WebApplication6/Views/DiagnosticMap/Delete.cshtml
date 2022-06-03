@@ -1,0 +1,65 @@
+﻿@model WebApplication6.Models.DiagnosticMap
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>DiagnosticMap</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.stateCarNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.stateCarNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.engineNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.engineNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.color)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.color)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.carModel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.carModel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Driver.driverCertificateNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Driver.driverCertificateNumber)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

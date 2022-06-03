@@ -1,0 +1,706 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище ITModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CharacteristicsTI">
+          <Key>
+            <PropertyRef Name="idCharacteristicsTI" />
+          </Key>
+          <Property Name="idCharacteristicsTI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="brakeSystems" Type="bit" Nullable="false" />
+          <Property Name="steering" Type="bit" Nullable="false" />
+          <Property Name="lightDevices" Type="bit" Nullable="false" />
+          <Property Name="windscreenWipers" Type="bit" Nullable="false" />
+          <Property Name="tiresAndWheels" Type="bit" Nullable="false" />
+          <Property Name="engine" Type="bit" Nullable="false" />
+          <Property Name="structuralElements" Type="bit" Nullable="false" />
+          <Property Name="safetyRequirements" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DiagnosticMap">
+          <Key>
+            <PropertyRef Name="idDiagnosticMap" />
+          </Key>
+          <Property Name="idDiagnosticMap" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Driver_idDriver" Type="int" Nullable="false" />
+          <Property Name="stateCarNumber" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="engineNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="color" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="carModel" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="idDriver" />
+          </Key>
+          <Property Name="idDriver" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="driverCertificateNumber" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="fullName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="dateOfBirth" Type="date" Nullable="false" />
+          <Property Name="sex" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="adress" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ResultsTI">
+          <Key>
+            <PropertyRef Name="idResultsTI" />
+          </Key>
+          <Property Name="idResultsTI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TrafficPoliceOfficer_idTrafficPoliceOfficer" Type="int" Nullable="false" />
+          <Property Name="DiagnosticMap_idDiagnosticMap" Type="int" Nullable="false" />
+          <Property Name="CharacteristicsTI_idCharacteristicsTI" Type="int" Nullable="false" />
+          <Property Name="dateOfPassage" Type="date" Nullable="false" />
+          <Property Name="cityOfMaintenance" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="placeOfMaintenance" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="resultOfMaintenance" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TrafficPoliceOfficer">
+          <Key>
+            <PropertyRef Name="idTrafficPoliceOfficer" />
+          </Key>
+          <Property Name="idTrafficPoliceOfficer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="passportData" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="login" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="pasword" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="fullName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="rank" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="position" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Diagnosti__Drive__1DB06A4F">
+          <End Role="Driver" Type="Self.Driver" Multiplicity="1" />
+          <End Role="DiagnosticMap" Type="Self.DiagnosticMap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="idDriver" />
+            </Principal>
+            <Dependent Role="DiagnosticMap">
+              <PropertyRef Name="Driver_idDriver" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ResultsTI__Chara__75A278F5">
+          <End Role="CharacteristicsTI" Type="Self.CharacteristicsTI" Multiplicity="1" />
+          <End Role="ResultsTI" Type="Self.ResultsTI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CharacteristicsTI">
+              <PropertyRef Name="idCharacteristicsTI" />
+            </Principal>
+            <Dependent Role="ResultsTI">
+              <PropertyRef Name="CharacteristicsTI_idCharacteristicsTI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ResultsTI__Traff__73BA3083">
+          <End Role="TrafficPoliceOfficer" Type="Self.TrafficPoliceOfficer" Multiplicity="1" />
+          <End Role="ResultsTI" Type="Self.ResultsTI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrafficPoliceOfficer">
+              <PropertyRef Name="idTrafficPoliceOfficer" />
+            </Principal>
+            <Dependent Role="ResultsTI">
+              <PropertyRef Name="TrafficPoliceOfficer_idTrafficPoliceOfficer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="CharacteristicsTIInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="brakeSystems" Type="bit" Mode="In" />
+          <Parameter Name="steering" Type="bit" Mode="In" />
+          <Parameter Name="lightDevices" Type="bit" Mode="In" />
+          <Parameter Name="windscreenWipers" Type="bit" Mode="In" />
+          <Parameter Name="tiresAndWheels" Type="bit" Mode="In" />
+          <Parameter Name="engine" Type="bit" Mode="In" />
+          <Parameter Name="structuralElements" Type="bit" Mode="In" />
+          <Parameter Name="safetyRequirements" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="CharacteristicsTIOutputAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="DiagnosticMapAndDriverInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="driverCertificateNumber" Type="varchar" Mode="In" />
+          <Parameter Name="fullName" Type="varchar" Mode="In" />
+          <Parameter Name="dateOfBirth" Type="date" Mode="In" />
+          <Parameter Name="sex" Type="varchar" Mode="In" />
+          <Parameter Name="adress" Type="varchar" Mode="In" />
+          <Parameter Name="stateCarNumber" Type="varchar" Mode="In" />
+          <Parameter Name="engineNumber" Type="varchar" Mode="In" />
+          <Parameter Name="color" Type="varchar" Mode="In" />
+          <Parameter Name="carModel" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="DiagnosticMapInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Driver_idDriver" Type="int" Mode="In" />
+          <Parameter Name="stateCarNumber" Type="varchar" Mode="In" />
+          <Parameter Name="engineNumber" Type="varchar" Mode="In" />
+          <Parameter Name="color" Type="varchar" Mode="In" />
+          <Parameter Name="carModel" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="DiagnosticMapOutputAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="DriverAndDiagnosticMapOutput" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="DriverInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="driverCertificateNumber" Type="varchar" Mode="In" />
+          <Parameter Name="fullName" Type="varchar" Mode="In" />
+          <Parameter Name="dateOfBirth" Type="date" Mode="In" />
+          <Parameter Name="sex" Type="varchar" Mode="In" />
+          <Parameter Name="adress" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="DriverOutputAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="DriverUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idDriver" Type="int" Mode="In" />
+          <Parameter Name="driverCertificateNumber" Type="varchar" Mode="In" />
+          <Parameter Name="fullName" Type="varchar" Mode="In" />
+          <Parameter Name="dateOfBirth" Type="date" Mode="In" />
+          <Parameter Name="sex" Type="varchar" Mode="In" />
+          <Parameter Name="adress" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ResultsAllInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TrafficPoliceOfficer_idTrafficPoliceOfficer" Type="int" Mode="In" />
+          <Parameter Name="DiagnosticMap_idDiagnosticMap" Type="int" Mode="In" />
+          <Parameter Name="dateOfPassage" Type="date" Mode="In" />
+          <Parameter Name="cityOfMaintenance" Type="varchar" Mode="In" />
+          <Parameter Name="placeOfMaintenance" Type="varchar" Mode="In" />
+          <Parameter Name="resultOfMaintenance" Type="bit" Mode="In" />
+          <Parameter Name="brakeSystems" Type="bit" Mode="In" />
+          <Parameter Name="steering" Type="bit" Mode="In" />
+          <Parameter Name="lightDevices" Type="bit" Mode="In" />
+          <Parameter Name="windscreenWipers" Type="bit" Mode="In" />
+          <Parameter Name="tiresAndWheels" Type="bit" Mode="In" />
+          <Parameter Name="engine" Type="bit" Mode="In" />
+          <Parameter Name="structuralElements" Type="bit" Mode="In" />
+          <Parameter Name="safetyRequirements" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="ResultsOutputAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ResultsTIInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TrafficPoliceOfficer_idTrafficPoliceOfficer" Type="int" Mode="In" />
+          <Parameter Name="DiagnosticMap_idDiagnosticMap" Type="int" Mode="In" />
+          <Parameter Name="CharacteristicsTI_idCharacteristicsTI" Type="int" Mode="In" />
+          <Parameter Name="dateOfPassage" Type="date" Mode="In" />
+          <Parameter Name="cityOfMaintenance" Type="varchar" Mode="In" />
+          <Parameter Name="placeOfMaintenance" Type="varchar" Mode="In" />
+          <Parameter Name="resultOfMaintenance" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="ResultsTIOutputAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="TrafficPoliceOfficerInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="passportData" Type="varchar" Mode="In" />
+          <Parameter Name="login" Type="varchar" Mode="In" />
+          <Parameter Name="pasword" Type="varchar" Mode="In" />
+          <Parameter Name="fullName" Type="varchar" Mode="In" />
+          <Parameter Name="rank" Type="varchar" Mode="In" />
+          <Parameter Name="position" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="TrafficPoliceOfficerOutputAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="Хранилище ITModelContainer">
+          <EntitySet Name="CharacteristicsTI" EntityType="Self.CharacteristicsTI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DiagnosticMap" EntityType="Self.DiagnosticMap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResultsTI" EntityType="Self.ResultsTI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrafficPoliceOfficer" EntityType="Self.TrafficPoliceOfficer" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Diagnosti__Drive__1DB06A4F" Association="Self.FK__Diagnosti__Drive__1DB06A4F">
+            <End Role="Driver" EntitySet="Driver" />
+            <End Role="DiagnosticMap" EntitySet="DiagnosticMap" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ResultsTI__Chara__75A278F5" Association="Self.FK__ResultsTI__Chara__75A278F5">
+            <End Role="CharacteristicsTI" EntitySet="CharacteristicsTI" />
+            <End Role="ResultsTI" EntitySet="ResultsTI" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ResultsTI__Traff__73BA3083" Association="Self.FK__ResultsTI__Traff__73BA3083">
+            <End Role="TrafficPoliceOfficer" EntitySet="TrafficPoliceOfficer" />
+            <End Role="ResultsTI" EntitySet="ResultsTI" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ITModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CharacteristicsTI">
+          <Key>
+            <PropertyRef Name="idCharacteristicsTI" />
+          </Key>
+          <Property Name="idCharacteristicsTI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="brakeSystems" Type="Boolean" Nullable="false" />
+          <Property Name="steering" Type="Boolean" Nullable="false" />
+          <Property Name="lightDevices" Type="Boolean" Nullable="false" />
+          <Property Name="windscreenWipers" Type="Boolean" Nullable="false" />
+          <Property Name="tiresAndWheels" Type="Boolean" Nullable="false" />
+          <Property Name="engine" Type="Boolean" Nullable="false" />
+          <Property Name="structuralElements" Type="Boolean" Nullable="false" />
+          <Property Name="safetyRequirements" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ResultsTI" Relationship="Self.FK__ResultsTI__Chara__75A278F5" FromRole="CharacteristicsTI" ToRole="ResultsTI" />
+        </EntityType>
+        <EntityType Name="DiagnosticMap">
+          <Key>
+            <PropertyRef Name="idDiagnosticMap" />
+          </Key>
+          <Property Name="idDiagnosticMap" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Driver_idDriver" Type="Int32" Nullable="false" />
+          <Property Name="stateCarNumber" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="engineNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="color" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="carModel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Driver" Relationship="Self.FK__Diagnosti__Drive__1DB06A4F" FromRole="DiagnosticMap" ToRole="Driver" />
+        </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="idDriver" />
+          </Key>
+          <Property Name="idDriver" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="driverCertificateNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fullName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="sex" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="adress" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DiagnosticMap" Relationship="Self.FK__Diagnosti__Drive__1DB06A4F" FromRole="Driver" ToRole="DiagnosticMap" />
+        </EntityType>
+        <EntityType Name="ResultsTI">
+          <Key>
+            <PropertyRef Name="idResultsTI" />
+          </Key>
+          <Property Name="idResultsTI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TrafficPoliceOfficer_idTrafficPoliceOfficer" Type="Int32" Nullable="false" />
+          <Property Name="DiagnosticMap_idDiagnosticMap" Type="Int32" Nullable="false" />
+          <Property Name="CharacteristicsTI_idCharacteristicsTI" Type="Int32" Nullable="false" />
+          <Property Name="dateOfPassage" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="cityOfMaintenance" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="placeOfMaintenance" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="resultOfMaintenance" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CharacteristicsTI" Relationship="Self.FK__ResultsTI__Chara__75A278F5" FromRole="ResultsTI" ToRole="CharacteristicsTI" />
+          <NavigationProperty Name="TrafficPoliceOfficer" Relationship="Self.FK__ResultsTI__Traff__73BA3083" FromRole="ResultsTI" ToRole="TrafficPoliceOfficer" />
+        </EntityType>
+        <EntityType Name="TrafficPoliceOfficer">
+          <Key>
+            <PropertyRef Name="idTrafficPoliceOfficer" />
+          </Key>
+          <Property Name="idTrafficPoliceOfficer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="passportData" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="login" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pasword" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fullName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rank" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ResultsTI" Relationship="Self.FK__ResultsTI__Traff__73BA3083" FromRole="TrafficPoliceOfficer" ToRole="ResultsTI" />
+        </EntityType>
+        <Association Name="FK__ResultsTI__Chara__75A278F5">
+          <End Role="CharacteristicsTI" Type="Self.CharacteristicsTI" Multiplicity="1" />
+          <End Role="ResultsTI" Type="Self.ResultsTI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CharacteristicsTI">
+              <PropertyRef Name="idCharacteristicsTI" />
+            </Principal>
+            <Dependent Role="ResultsTI">
+              <PropertyRef Name="CharacteristicsTI_idCharacteristicsTI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Diagnosti__Drive__1DB06A4F">
+          <End Role="Driver" Type="Self.Driver" Multiplicity="1" />
+          <End Role="DiagnosticMap" Type="Self.DiagnosticMap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="idDriver" />
+            </Principal>
+            <Dependent Role="DiagnosticMap">
+              <PropertyRef Name="Driver_idDriver" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ResultsTI__Traff__73BA3083">
+          <End Role="TrafficPoliceOfficer" Type="Self.TrafficPoliceOfficer" Multiplicity="1" />
+          <End Role="ResultsTI" Type="Self.ResultsTI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrafficPoliceOfficer">
+              <PropertyRef Name="idTrafficPoliceOfficer" />
+            </Principal>
+            <Dependent Role="ResultsTI">
+              <PropertyRef Name="TrafficPoliceOfficer_idTrafficPoliceOfficer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ITEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CharacteristicsTI" EntityType="Self.CharacteristicsTI" />
+          <EntitySet Name="DiagnosticMap" EntityType="Self.DiagnosticMap" />
+          <EntitySet Name="Driver" EntityType="Self.Driver" />
+          <EntitySet Name="ResultsTI" EntityType="Self.ResultsTI" />
+          <EntitySet Name="TrafficPoliceOfficer" EntityType="Self.TrafficPoliceOfficer" />
+          <AssociationSet Name="FK__ResultsTI__Chara__75A278F5" Association="Self.FK__ResultsTI__Chara__75A278F5">
+            <End Role="CharacteristicsTI" EntitySet="CharacteristicsTI" />
+            <End Role="ResultsTI" EntitySet="ResultsTI" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Diagnosti__Drive__1DB06A4F" Association="Self.FK__Diagnosti__Drive__1DB06A4F">
+            <End Role="Driver" EntitySet="Driver" />
+            <End Role="DiagnosticMap" EntitySet="DiagnosticMap" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ResultsTI__Traff__73BA3083" Association="Self.FK__ResultsTI__Traff__73BA3083">
+            <End Role="TrafficPoliceOfficer" EntitySet="TrafficPoliceOfficer" />
+            <End Role="ResultsTI" EntitySet="ResultsTI" />
+          </AssociationSet>
+          <FunctionImport Name="CharacteristicsTIInsert">
+            <Parameter Name="brakeSystems" Mode="In" Type="Boolean" />
+            <Parameter Name="steering" Mode="In" Type="Boolean" />
+            <Parameter Name="lightDevices" Mode="In" Type="Boolean" />
+            <Parameter Name="windscreenWipers" Mode="In" Type="Boolean" />
+            <Parameter Name="tiresAndWheels" Mode="In" Type="Boolean" />
+            <Parameter Name="engine" Mode="In" Type="Boolean" />
+            <Parameter Name="structuralElements" Mode="In" Type="Boolean" />
+            <Parameter Name="safetyRequirements" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="CharacteristicsTIOutputAll" ReturnType="Collection(ITModel.CharacteristicsTIOutputAll_Result)" />
+          <FunctionImport Name="DiagnosticMapAndDriverInsert">
+            <Parameter Name="driverCertificateNumber" Mode="In" Type="String" />
+            <Parameter Name="fullName" Mode="In" Type="String" />
+            <Parameter Name="dateOfBirth" Mode="In" Type="DateTime" />
+            <Parameter Name="sex" Mode="In" Type="String" />
+            <Parameter Name="adress" Mode="In" Type="String" />
+            <Parameter Name="stateCarNumber" Mode="In" Type="String" />
+            <Parameter Name="engineNumber" Mode="In" Type="String" />
+            <Parameter Name="color" Mode="In" Type="String" />
+            <Parameter Name="carModel" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DiagnosticMapInsert">
+            <Parameter Name="Driver_idDriver" Mode="In" Type="Int32" />
+            <Parameter Name="stateCarNumber" Mode="In" Type="String" />
+            <Parameter Name="engineNumber" Mode="In" Type="String" />
+            <Parameter Name="color" Mode="In" Type="String" />
+            <Parameter Name="carModel" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DiagnosticMapOutputAll" ReturnType="Collection(ITModel.DiagnosticMapOutputAll_Result)" />
+          <FunctionImport Name="DriverAndDiagnosticMapOutput" ReturnType="Collection(ITModel.DriverAndDiagnosticMapOutput_Result)" />
+          <FunctionImport Name="DriverInsert">
+            <Parameter Name="driverCertificateNumber" Mode="In" Type="String" />
+            <Parameter Name="fullName" Mode="In" Type="String" />
+            <Parameter Name="dateOfBirth" Mode="In" Type="DateTime" />
+            <Parameter Name="sex" Mode="In" Type="String" />
+            <Parameter Name="adress" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DriverOutputAll" ReturnType="Collection(ITModel.DriverOutputAll_Result)" />
+          <FunctionImport Name="DriverUpdate">
+            <Parameter Name="idDriver" Mode="In" Type="Int32" />
+            <Parameter Name="driverCertificateNumber" Mode="In" Type="String" />
+            <Parameter Name="fullName" Mode="In" Type="String" />
+            <Parameter Name="dateOfBirth" Mode="In" Type="DateTime" />
+            <Parameter Name="sex" Mode="In" Type="String" />
+            <Parameter Name="adress" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ResultsAllInsert">
+            <Parameter Name="TrafficPoliceOfficer_idTrafficPoliceOfficer" Mode="In" Type="Int32" />
+            <Parameter Name="DiagnosticMap_idDiagnosticMap" Mode="In" Type="Int32" />
+            <Parameter Name="dateOfPassage" Mode="In" Type="DateTime" />
+            <Parameter Name="cityOfMaintenance" Mode="In" Type="String" />
+            <Parameter Name="placeOfMaintenance" Mode="In" Type="String" />
+            <Parameter Name="resultOfMaintenance" Mode="In" Type="Boolean" />
+            <Parameter Name="brakeSystems" Mode="In" Type="Boolean" />
+            <Parameter Name="steering" Mode="In" Type="Boolean" />
+            <Parameter Name="lightDevices" Mode="In" Type="Boolean" />
+            <Parameter Name="windscreenWipers" Mode="In" Type="Boolean" />
+            <Parameter Name="tiresAndWheels" Mode="In" Type="Boolean" />
+            <Parameter Name="engine" Mode="In" Type="Boolean" />
+            <Parameter Name="structuralElements" Mode="In" Type="Boolean" />
+            <Parameter Name="safetyRequirements" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ResultsOutputAll" ReturnType="Collection(ITModel.ResultsOutputAll_Result)" />
+          <FunctionImport Name="ResultsTIInsert">
+            <Parameter Name="TrafficPoliceOfficer_idTrafficPoliceOfficer" Mode="In" Type="Int32" />
+            <Parameter Name="DiagnosticMap_idDiagnosticMap" Mode="In" Type="Int32" />
+            <Parameter Name="CharacteristicsTI_idCharacteristicsTI" Mode="In" Type="Int32" />
+            <Parameter Name="dateOfPassage" Mode="In" Type="DateTime" />
+            <Parameter Name="cityOfMaintenance" Mode="In" Type="String" />
+            <Parameter Name="placeOfMaintenance" Mode="In" Type="String" />
+            <Parameter Name="resultOfMaintenance" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ResultsTIOutputAll" ReturnType="Collection(ITModel.ResultsTIOutputAll_Result)" />
+          <FunctionImport Name="TrafficPoliceOfficerInsert">
+            <Parameter Name="passportData" Mode="In" Type="String" />
+            <Parameter Name="login" Mode="In" Type="String" />
+            <Parameter Name="pasword" Mode="In" Type="String" />
+            <Parameter Name="fullName" Mode="In" Type="String" />
+            <Parameter Name="rank" Mode="In" Type="String" />
+            <Parameter Name="position" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="TrafficPoliceOfficerOutputAll" ReturnType="Collection(ITModel.TrafficPoliceOfficerOutputAll_Result)" />
+        </EntityContainer>
+        <ComplexType Name="CharacteristicsTIOutputAll_Result">
+          <Property Type="Int32" Name="idCharacteristicsTI" Nullable="false" />
+          <Property Type="Boolean" Name="brakeSystems" Nullable="false" />
+          <Property Type="Boolean" Name="steering" Nullable="false" />
+          <Property Type="Boolean" Name="lightDevices" Nullable="false" />
+          <Property Type="Boolean" Name="windscreenWipers" Nullable="false" />
+          <Property Type="Boolean" Name="tiresAndWheels" Nullable="false" />
+          <Property Type="Boolean" Name="engine" Nullable="false" />
+          <Property Type="Boolean" Name="structuralElements" Nullable="false" />
+          <Property Type="Boolean" Name="safetyRequirements" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="DiagnosticMapOutputAll_Result">
+          <Property Type="Int32" Name="idDiagnosticMap" Nullable="false" />
+          <Property Type="Int32" Name="Driver_idDriver" Nullable="false" />
+          <Property Type="String" Name="stateCarNumber" Nullable="false" MaxLength="9" />
+          <Property Type="String" Name="engineNumber" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="color" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="carModel" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="DriverAndDiagnosticMapOutput_Result">
+          <Property Type="Int32" Name="idDiagnosticMap" Nullable="false" />
+          <Property Type="Int32" Name="Driver_idDriver" Nullable="false" />
+          <Property Type="String" Name="stateCarNumber" Nullable="false" MaxLength="9" />
+          <Property Type="String" Name="engineNumber" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="color" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="carModel" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="idDriver" Nullable="false" />
+          <Property Type="String" Name="driverCertificateNumber" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="fullName" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="dateOfBirth" Nullable="false" />
+          <Property Type="String" Name="sex" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="adress" Nullable="false" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="DriverOutputAll_Result">
+          <Property Type="Int32" Name="idDriver" Nullable="false" />
+          <Property Type="String" Name="driverCertificateNumber" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="fullName" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="dateOfBirth" Nullable="false" />
+          <Property Type="String" Name="sex" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="adress" Nullable="false" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="ResultsOutputAll_Result">
+          <Property Type="Int32" Name="idResultsTI" Nullable="false" />
+          <Property Type="Int32" Name="TrafficPoliceOfficer_idTrafficPoliceOfficer" Nullable="false" />
+          <Property Type="Int32" Name="DiagnosticMap_idDiagnosticMap" Nullable="false" />
+          <Property Type="Int32" Name="CharacteristicsTI_idCharacteristicsTI" Nullable="false" />
+          <Property Type="DateTime" Name="dateOfPassage" Nullable="false" />
+          <Property Type="String" Name="cityOfMaintenance" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="placeOfMaintenance" Nullable="false" MaxLength="60" />
+          <Property Type="Boolean" Name="resultOfMaintenance" Nullable="false" />
+          <Property Type="Int32" Name="idCharacteristicsTI" Nullable="false" />
+          <Property Type="Boolean" Name="brakeSystems" Nullable="false" />
+          <Property Type="Boolean" Name="steering" Nullable="false" />
+          <Property Type="Boolean" Name="lightDevices" Nullable="false" />
+          <Property Type="Boolean" Name="windscreenWipers" Nullable="false" />
+          <Property Type="Boolean" Name="tiresAndWheels" Nullable="false" />
+          <Property Type="Boolean" Name="engine" Nullable="false" />
+          <Property Type="Boolean" Name="structuralElements" Nullable="false" />
+          <Property Type="Boolean" Name="safetyRequirements" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ResultsTIOutputAll_Result">
+          <Property Type="Int32" Name="idResultsTI" Nullable="false" />
+          <Property Type="Int32" Name="TrafficPoliceOfficer_idTrafficPoliceOfficer" Nullable="false" />
+          <Property Type="Int32" Name="DiagnosticMap_idDiagnosticMap" Nullable="false" />
+          <Property Type="Int32" Name="CharacteristicsTI_idCharacteristicsTI" Nullable="false" />
+          <Property Type="DateTime" Name="dateOfPassage" Nullable="false" />
+          <Property Type="String" Name="cityOfMaintenance" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="placeOfMaintenance" Nullable="false" MaxLength="60" />
+          <Property Type="Boolean" Name="resultOfMaintenance" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="TrafficPoliceOfficerOutputAll_Result">
+          <Property Type="Int32" Name="idTrafficPoliceOfficer" Nullable="false" />
+          <Property Type="String" Name="passportData" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="login" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="pasword" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="fullName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="rank" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="position" Nullable="false" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ITModelContainer" CdmEntityContainer="ITEntities">
+          <EntitySetMapping Name="CharacteristicsTI">
+            <EntityTypeMapping TypeName="ITModel.CharacteristicsTI">
+              <MappingFragment StoreEntitySet="CharacteristicsTI">
+                <ScalarProperty Name="idCharacteristicsTI" ColumnName="idCharacteristicsTI" />
+                <ScalarProperty Name="brakeSystems" ColumnName="brakeSystems" />
+                <ScalarProperty Name="steering" ColumnName="steering" />
+                <ScalarProperty Name="lightDevices" ColumnName="lightDevices" />
+                <ScalarProperty Name="windscreenWipers" ColumnName="windscreenWipers" />
+                <ScalarProperty Name="tiresAndWheels" ColumnName="tiresAndWheels" />
+                <ScalarProperty Name="engine" ColumnName="engine" />
+                <ScalarProperty Name="structuralElements" ColumnName="structuralElements" />
+                <ScalarProperty Name="safetyRequirements" ColumnName="safetyRequirements" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DiagnosticMap">
+            <EntityTypeMapping TypeName="ITModel.DiagnosticMap">
+              <MappingFragment StoreEntitySet="DiagnosticMap">
+                <ScalarProperty Name="idDiagnosticMap" ColumnName="idDiagnosticMap" />
+                <ScalarProperty Name="Driver_idDriver" ColumnName="Driver_idDriver" />
+                <ScalarProperty Name="stateCarNumber" ColumnName="stateCarNumber" />
+                <ScalarProperty Name="engineNumber" ColumnName="engineNumber" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="carModel" ColumnName="carModel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Driver">
+            <EntityTypeMapping TypeName="ITModel.Driver">
+              <MappingFragment StoreEntitySet="Driver">
+                <ScalarProperty Name="idDriver" ColumnName="idDriver" />
+                <ScalarProperty Name="driverCertificateNumber" ColumnName="driverCertificateNumber" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+                <ScalarProperty Name="dateOfBirth" ColumnName="dateOfBirth" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResultsTI">
+            <EntityTypeMapping TypeName="ITModel.ResultsTI">
+              <MappingFragment StoreEntitySet="ResultsTI">
+                <ScalarProperty Name="idResultsTI" ColumnName="idResultsTI" />
+                <ScalarProperty Name="TrafficPoliceOfficer_idTrafficPoliceOfficer" ColumnName="TrafficPoliceOfficer_idTrafficPoliceOfficer" />
+                <ScalarProperty Name="DiagnosticMap_idDiagnosticMap" ColumnName="DiagnosticMap_idDiagnosticMap" />
+                <ScalarProperty Name="CharacteristicsTI_idCharacteristicsTI" ColumnName="CharacteristicsTI_idCharacteristicsTI" />
+                <ScalarProperty Name="dateOfPassage" ColumnName="dateOfPassage" />
+                <ScalarProperty Name="cityOfMaintenance" ColumnName="cityOfMaintenance" />
+                <ScalarProperty Name="placeOfMaintenance" ColumnName="placeOfMaintenance" />
+                <ScalarProperty Name="resultOfMaintenance" ColumnName="resultOfMaintenance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrafficPoliceOfficer">
+            <EntityTypeMapping TypeName="ITModel.TrafficPoliceOfficer">
+              <MappingFragment StoreEntitySet="TrafficPoliceOfficer">
+                <ScalarProperty Name="idTrafficPoliceOfficer" ColumnName="idTrafficPoliceOfficer" />
+                <ScalarProperty Name="passportData" ColumnName="passportData" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="pasword" ColumnName="pasword" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+                <ScalarProperty Name="rank" ColumnName="rank" />
+                <ScalarProperty Name="position" ColumnName="position" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CharacteristicsTIInsert" FunctionName="Хранилище ITModel.CharacteristicsTIInsert" />
+          <FunctionImportMapping FunctionImportName="CharacteristicsTIOutputAll" FunctionName="Хранилище ITModel.CharacteristicsTIOutputAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ITModel.CharacteristicsTIOutputAll_Result">
+                <ScalarProperty Name="idCharacteristicsTI" ColumnName="idCharacteristicsTI" />
+                <ScalarProperty Name="brakeSystems" ColumnName="brakeSystems" />
+                <ScalarProperty Name="steering" ColumnName="steering" />
+                <ScalarProperty Name="lightDevices" ColumnName="lightDevices" />
+                <ScalarProperty Name="windscreenWipers" ColumnName="windscreenWipers" />
+                <ScalarProperty Name="tiresAndWheels" ColumnName="tiresAndWheels" />
+                <ScalarProperty Name="engine" ColumnName="engine" />
+                <ScalarProperty Name="structuralElements" ColumnName="structuralElements" />
+                <ScalarProperty Name="safetyRequirements" ColumnName="safetyRequirements" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DiagnosticMapAndDriverInsert" FunctionName="Хранилище ITModel.DiagnosticMapAndDriverInsert" />
+          <FunctionImportMapping FunctionImportName="DiagnosticMapInsert" FunctionName="Хранилище ITModel.DiagnosticMapInsert" />
+          <FunctionImportMapping FunctionImportName="DiagnosticMapOutputAll" FunctionName="Хранилище ITModel.DiagnosticMapOutputAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ITModel.DiagnosticMapOutputAll_Result">
+                <ScalarProperty Name="idDiagnosticMap" ColumnName="idDiagnosticMap" />
+                <ScalarProperty Name="Driver_idDriver" ColumnName="Driver_idDriver" />
+                <ScalarProperty Name="stateCarNumber" ColumnName="stateCarNumber" />
+                <ScalarProperty Name="engineNumber" ColumnName="engineNumber" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="carModel" ColumnName="carModel" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DriverAndDiagnosticMapOutput" FunctionName="Хранилище ITModel.DriverAndDiagnosticMapOutput">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ITModel.DriverAndDiagnosticMapOutput_Result">
+                <ScalarProperty Name="idDiagnosticMap" ColumnName="idDiagnosticMap" />
+                <ScalarProperty Name="Driver_idDriver" ColumnName="Driver_idDriver" />
+                <ScalarProperty Name="stateCarNumber" ColumnName="stateCarNumber" />
+                <ScalarProperty Name="engineNumber" ColumnName="engineNumber" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="carModel" ColumnName="carModel" />
+                <ScalarProperty Name="idDriver" ColumnName="idDriver" />
+                <ScalarProperty Name="driverCertificateNumber" ColumnName="driverCertificateNumber" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+                <ScalarProperty Name="dateOfBirth" ColumnName="dateOfBirth" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DriverInsert" FunctionName="Хранилище ITModel.DriverInsert" />
+          <FunctionImportMapping FunctionImportName="DriverOutputAll" FunctionName="Хранилище ITModel.DriverOutputAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ITModel.DriverOutputAll_Result">
+                <ScalarProperty Name="idDriver" ColumnName="idDriver" />
+                <ScalarProperty Name="driverCertificateNumber" ColumnName="driverCertificateNumber" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+                <ScalarProperty Name="dateOfBirth" ColumnName="dateOfBirth" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DriverUpdate" FunctionName="Хранилище ITModel.DriverUpdate" />
+          <FunctionImportMapping FunctionImportName="ResultsAllInsert" FunctionName="Хранилище ITModel.ResultsAllInsert" />
+          <FunctionImportMapping FunctionImportName="ResultsOutputAll" FunctionName="Хранилище ITModel.ResultsOutputAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ITModel.ResultsOutputAll_Result">
+                <ScalarProperty Name="idResultsTI" ColumnName="idResultsTI" />
+                <ScalarProperty Name="TrafficPoliceOfficer_idTrafficPoliceOfficer" ColumnName="TrafficPoliceOfficer_idTrafficPoliceOfficer" />
+                <ScalarProperty Name="DiagnosticMap_idDiagnosticMap" ColumnName="DiagnosticMap_idDiagnosticMap" />
+                <ScalarProperty Name="CharacteristicsTI_idCharacteristicsTI" ColumnName="CharacteristicsTI_idCharacteristicsTI" />
+                <ScalarProperty Name="dateOfPassage" ColumnName="dateOfPassage" />
+                <ScalarProperty Name="cityOfMaintenance" ColumnName="cityOfMaintenance" />
+                <ScalarProperty Name="placeOfMaintenance" ColumnName="placeOfMaintenance" />
+                <ScalarProperty Name="resultOfMaintenance" ColumnName="resultOfMaintenance" />
+                <ScalarProperty Name="idCharacteristicsTI" ColumnName="idCharacteristicsTI" />
+                <ScalarProperty Name="brakeSystems" ColumnName="brakeSystems" />
+                <ScalarProperty Name="steering" ColumnName="steering" />
+                <ScalarProperty Name="lightDevices" ColumnName="lightDevices" />
+                <ScalarProperty Name="windscreenWipers" ColumnName="windscreenWipers" />
+                <ScalarProperty Name="tiresAndWheels" ColumnName="tiresAndWheels" />
+                <ScalarProperty Name="engine" ColumnName="engine" />
+                <ScalarProperty Name="structuralElements" ColumnName="structuralElements" />
+                <ScalarProperty Name="safetyRequirements" ColumnName="safetyRequirements" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ResultsTIInsert" FunctionName="Хранилище ITModel.ResultsTIInsert" />
+          <FunctionImportMapping FunctionImportName="ResultsTIOutputAll" FunctionName="Хранилище ITModel.ResultsTIOutputAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ITModel.ResultsTIOutputAll_Result">
+                <ScalarProperty Name="idResultsTI" ColumnName="idResultsTI" />
+                <ScalarProperty Name="TrafficPoliceOfficer_idTrafficPoliceOfficer" ColumnName="TrafficPoliceOfficer_idTrafficPoliceOfficer" />
+                <ScalarProperty Name="DiagnosticMap_idDiagnosticMap" ColumnName="DiagnosticMap_idDiagnosticMap" />
+                <ScalarProperty Name="CharacteristicsTI_idCharacteristicsTI" ColumnName="CharacteristicsTI_idCharacteristicsTI" />
+                <ScalarProperty Name="dateOfPassage" ColumnName="dateOfPassage" />
+                <ScalarProperty Name="cityOfMaintenance" ColumnName="cityOfMaintenance" />
+                <ScalarProperty Name="placeOfMaintenance" ColumnName="placeOfMaintenance" />
+                <ScalarProperty Name="resultOfMaintenance" ColumnName="resultOfMaintenance" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TrafficPoliceOfficerInsert" FunctionName="Хранилище ITModel.TrafficPoliceOfficerInsert" />
+          <FunctionImportMapping FunctionImportName="TrafficPoliceOfficerOutputAll" FunctionName="Хранилище ITModel.TrafficPoliceOfficerOutputAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ITModel.TrafficPoliceOfficerOutputAll_Result">
+                <ScalarProperty Name="idTrafficPoliceOfficer" ColumnName="idTrafficPoliceOfficer" />
+                <ScalarProperty Name="passportData" ColumnName="passportData" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="pasword" ColumnName="pasword" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+                <ScalarProperty Name="rank" ColumnName="rank" />
+                <ScalarProperty Name="position" ColumnName="position" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

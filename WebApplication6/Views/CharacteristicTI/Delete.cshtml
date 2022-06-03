@@ -1,0 +1,89 @@
+﻿@model WebApplication6.Models.CharacteristicsTI
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>CharacteristicsTI</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.brakeSystems)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.brakeSystems)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.steering)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.steering)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lightDevices)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lightDevices)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.windscreenWipers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.windscreenWipers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tiresAndWheels)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tiresAndWheels)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.engine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.engine)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.structuralElements)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.structuralElements)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.safetyRequirements)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.safetyRequirements)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

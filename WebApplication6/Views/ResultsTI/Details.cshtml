@@ -1,0 +1,75 @@
+﻿@model WebApplication6.Models.ResultsTI
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ResultsTI</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DiagnosticMap_idDiagnosticMap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiagnosticMap_idDiagnosticMap)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateOfPassage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateOfPassage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cityOfMaintenance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cityOfMaintenance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.placeOfMaintenance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.placeOfMaintenance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.resultOfMaintenance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.resultOfMaintenance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CharacteristicsTI.idCharacteristicsTI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CharacteristicsTI.idCharacteristicsTI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrafficPoliceOfficer.passportData)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrafficPoliceOfficer.passportData)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idResultsTI }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

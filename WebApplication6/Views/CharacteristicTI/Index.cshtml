@@ -1,0 +1,76 @@
+﻿@model IEnumerable<WebApplication6.Models.CharacteristicsTI>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.brakeSystems)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.steering)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lightDevices)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.windscreenWipers)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tiresAndWheels)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.engine)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.structuralElements)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.safetyRequirements)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.brakeSystems)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.steering)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lightDevices)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.windscreenWipers)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tiresAndWheels)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.engine)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.structuralElements)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.safetyRequirements)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idCharacteristicsTI }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idCharacteristicsTI }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idCharacteristicsTI })
+        </td>
+    </tr>
+}
+
+</table>

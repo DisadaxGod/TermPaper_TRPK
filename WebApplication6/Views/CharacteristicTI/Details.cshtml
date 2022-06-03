@@ -1,0 +1,83 @@
+﻿@model WebApplication6.Models.CharacteristicsTI
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CharacteristicsTI</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.brakeSystems)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.brakeSystems)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.steering)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.steering)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lightDevices)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lightDevices)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.windscreenWipers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.windscreenWipers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tiresAndWheels)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tiresAndWheels)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.engine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.engine)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.structuralElements)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.structuralElements)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.safetyRequirements)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.safetyRequirements)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idCharacteristicsTI }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,59 @@
+﻿@model WebApplication6.Models.DiagnosticMap
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DiagnosticMap</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.stateCarNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.stateCarNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.engineNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.engineNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.color)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.color)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.carModel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.carModel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Driver.driverCertificateNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Driver.driverCertificateNumber)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idDiagnosticMap }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
