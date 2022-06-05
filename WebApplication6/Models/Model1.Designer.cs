@@ -1,4 +1,4 @@
-﻿// Создание кода T4 для модели "C:\Users\Useless\source\repos\WebApplication6\WebApplication6\Models\Model1.edmx" включено. 
+﻿// Создание кода T4 для модели "C:\Users\Useless\source\repos\WebApplication6\TermPaper_TRPK\WebApplication6\Models\Model1.edmx" включено. 
 // Чтобы включить формирование кода прежних версий, измените значение свойства "Стратегия создания кода" конструктора
 // на "Legacy ObjectContext". Это свойство доступно в окне "Свойства", если модель
 // открыта в конструкторе.

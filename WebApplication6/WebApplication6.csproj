@@ -185,10 +185,10 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\TrafficPoliceOfficerController.cs" />
-    <Compile Include="Views\CharacteristicTIController.cs" />
-    <Compile Include="Views\DiagnosticMapController.cs" />
-    <Compile Include="Views\DriverController.cs" />
-    <Compile Include="Views\ResultsTIController.cs" />
+    <Compile Include="Controllers\CharacteristicTIController.cs" />
+    <Compile Include="Controllers\DiagnosticMapController.cs" />
+    <Compile Include="Controllers\DriverController.cs" />
+    <Compile Include="Controllers\ResultsTIController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
